@@ -247,7 +247,7 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   
   loader.load(
-    "/heart.glb",
+    "./assets/heart.glb",
     (gltf) => {
       heartModel = gltf.scene;
       
