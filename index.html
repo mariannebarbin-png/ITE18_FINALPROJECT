@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Heart Anatomy Learning Platform</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav id="main-navbar" class="navbar">
+    <div class="navbar-content">
+      <h1>Virtual Heart Anatomy</h1>
+      <div style="display: flex; gap: 1rem;">
+        <button id="learn-mode-btn" class="nav-btn">Learn Mode</button>
+        <button id="quiz-nav-btn" class="nav-btn">Knowledge Check</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3D Viewer (Full Screen) -->
+  <div id="viewer-container">
+    <canvas id="anatomyCanvas"></canvas>
+    <div id="blood-flow-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
+    
+    <!-- Learn Mode Sidebar -->
+    <div id="learn-sidebar" class="learn-sidebar">
+      <button id="close-sidebar" class="close-sidebar-btn">✕</button>
+      <div id="sidebar-content"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal (Hidden by default, shows on navbar click) -->
+  <div id="quiz-modal" class="quiz-modal hidden">
+    <div class="quiz-modal-content">
+      <button id="close-quiz-modal" class="close-btn">✕</button>
+      <div id="quiz-difficulty" style="text-align: center; margin-bottom: 1rem;">
+        <label>Difficulty: </label>
+        <select id="difficulty-select" style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ddd; font-weight: 600;">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <section id="quiz"></section>
+    </div>
+  </div>
+
+  <!-- Heart Facts Easter Egg -->
+  <div id="heart-facts-popup" style="display: none; position: fixed; bottom: 20px; right: 20px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); max-width: 250px; z-index: 900;">
+    <strong style="color: #667eea;">💡 Did you know?</strong>
+    <p id="random-fact" style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #2d3748;"></p>
+  </div>
+
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
