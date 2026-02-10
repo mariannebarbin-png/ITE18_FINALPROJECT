@@ -163,7 +163,7 @@ const allQuizQuestions = [
   }
 ];
 
-// Filter questions by difficulty
+// Difficulty of quiz
 function getQuestionsByDifficulty(difficulty) {
   return allQuizQuestions.filter(q => q.difficulty === difficulty);
 }
@@ -269,7 +269,7 @@ function loadHeartModel() {
       const center = box.getCenter(new THREE.Vector3());
       heartModel.position.sub(center);
       
-      // Calculate size and scale to fit in view
+      // Fit view
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
@@ -277,8 +277,6 @@ function loadHeartModel() {
       
       camera.position.z = cameraZ;
       camera.lookAt(heartModel.position);
-      
-      console.log("Heart model loaded!");
     },
     undefined,
     (error) => console.error("Error loading model:", error)
@@ -305,7 +303,7 @@ function onHover(event) {
 }
 
 function onClick(event) {
-  // Only allow clicks in learn mode
+  // Clicks in learn more
   if (!isLearnMode || !heartMesh) return;
   
   const rect = canvas.getBoundingClientRect();
@@ -316,14 +314,14 @@ function onClick(event) {
   const intersects = raycaster.intersectObject(heartMesh, false);
 
   if (intersects.length > 0) {
+    const overlay = document.getElementById('blood-flow-overlay');
+    if (overlay) overlay.style.display = 'none';
+    
     // Flash effect
     heartMesh.material.emissive.setHex(0xff6600);
     setTimeout(() => {
       heartMesh.material.emissive.setHex(0x000000);
     }, 200);
-    
-    // Show blood flow animation
-    showBloodFlowAnimation();
     
     // Cycle through sections
     currentSection = (currentSection + 1) % heartSections.length;
@@ -349,7 +347,6 @@ function showSideBar(index) {
 
 function showSection(index) {
   const section = heartSections[index];
-  // This function is kept for backward compatibility but no longer used
 }
 
 function onResize() {
@@ -415,7 +412,6 @@ function loadQuizQuestion(index) {
     </div>
   `;
   
-  // Add click handlers
   document.querySelectorAll(".quiz-option").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const selectedIndex = parseInt(e.target.dataset.index);
@@ -423,7 +419,6 @@ function loadQuizQuestion(index) {
     });
   });
   
-  // Re-add navigation handlers
   document.getElementById("prev-card").addEventListener("click", () => {
     if (currentQuizIndex > 0) {
       currentQuizIndex--;
@@ -500,7 +495,7 @@ function showQuizResults() {
   });
 }
 
-// LEARN MODE CONTROLS
+// Learn More
 function initModeControls() {
   const learnModeBtn = document.getElementById("learn-mode-btn");
   
@@ -511,17 +506,22 @@ function initModeControls() {
       if (isLearnMode) {
         learnModeBtn.classList.add("active");
         currentSection = 0;
-        // Reset sidebar when entering learn mode
+        // Blood flow animation in learn mode
+        showBloodFlowAnimation();
+        
         document.getElementById("learn-sidebar").classList.remove("show");
       } else {
         learnModeBtn.classList.remove("active");
         document.getElementById("learn-sidebar").classList.remove("show");
+        
+        const overlay = document.getElementById('blood-flow-overlay');
+        if (overlay) overlay.style.display = 'none';
       }
     });
   }
 }
 
-// RANDOM FACTS DISPLAY
+// Random Facts
 function initRandomFacts() {
   const facts = heartSections.map(s => s.facts);
   const popup = document.getElementById('heart-facts-popup');
@@ -554,7 +554,7 @@ function updateProgressBar() {
   }
 }
 
-// BLOOD FLOW VISUALIZATION
+// Blood Flow
 function showBloodFlowAnimation() {
   const overlay = document.getElementById('blood-flow-overlay');
   if (!overlay) return;
@@ -594,27 +594,23 @@ function showBloodFlowAnimation() {
   `;
   
   overlay.appendChild(svg);
-  
-  setTimeout(() => {
-    overlay.style.display = 'none';
-  }, 3000);
 }
 
-// Add progress indicator
-setTimeout(() => {
-  const progress = document.createElement("div");
-  progress.id = "learning-progress";
-  progress.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(124, 58, 237, 0.9);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 1000;
-  `;
-}, 1000);
+const toggleInteriorBtn = document.getElementById('toggle-interior-btn');
+const sketchfabContainer = document.getElementById('sketchfab-container');
+
+if (toggleInteriorBtn && sketchfabContainer) {
+    toggleInteriorBtn.addEventListener('click', () => {
+        const isHidden = sketchfabContainer.style.display === 'none' || sketchfabContainer.style.display === '';
+
+        if (isHidden) {
+            sketchfabContainer.style.display = 'block';
+            toggleInteriorBtn.textContent = 'Hide Interior View';
+            toggleInteriorBtn.classList.add('hiding');
+        } else {
+            sketchfabContainer.style.display = 'none';
+            toggleInteriorBtn.textContent = 'Show Inner Heart';
+            toggleInteriorBtn.classList.remove('hiding');
+        }
+    });
+}

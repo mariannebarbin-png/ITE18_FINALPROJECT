@@ -11,18 +11,27 @@
   <nav id="main-navbar" class="navbar">
     <div class="navbar-content">
       <h1>Virtual Heart Anatomy</h1>
-      <div style="display: flex; gap: 1rem;">
-        <button id="learn-mode-btn" class="nav-btn">Learn Mode</button>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <button id="toggle-interior-btn" class="nav-btn">Show Inner Heart</button>
+        <button id="learn-mode-btn" class="nav-btn">Learn Mode</button>      
         <button id="quiz-nav-btn" class="nav-btn">Knowledge Check</button>
       </div>
     </div>
   </nav>
 
-  <!-- 3D Viewer -->
+  <!-- Interior -->
   <div id="viewer-container">
     <canvas id="anatomyCanvas"></canvas>
     <div id="blood-flow-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
     
+    <div id="interior-view-wrapper">
+      <div id="sketchfab-container">
+        <div class="sketchfab-embed-wrapper" style="width:100%; height:100%;">
+          <iframe title="Human Heart (Interior View)" frameborder="0" allowfullscreen allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/26adbbe9c3d34cb698b7f75d7bfb76a6/embed"></iframe>
+        </div>
+      </div>
+    </div>
+
     <!-- Learn Mode Sidebar -->
     <div id="learn-sidebar" class="learn-sidebar">
       <button id="close-sidebar" class="close-sidebar-btn">✕</button>
@@ -48,7 +57,7 @@
 
   <!-- Heart Facts -->
   <div id="heart-facts-popup" style="display: none; position: fixed; bottom: 20px; right: 20px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); max-width: 250px; z-index: 900;">
-    <strong style="color: #667eea;"> Did you know?</strong>
+    <strong style="color: #667eea;">💡Did you know?</strong>
     <p id="random-fact" style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #2d3748;"></p>
   </div>
 

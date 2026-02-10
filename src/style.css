@@ -12,7 +12,7 @@ body {
   overflow: hidden;
 }
 
-/* ================= NAVBAR ================= */
+/*  NAVBAR  */
 .navbar {
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
@@ -31,7 +31,6 @@ body {
   max-width: 1400px;
 }
 
-/* 🔒 Prevent navbar children from stretching */
 .navbar-content > * {
   flex: 0 0 auto;
 }
@@ -42,9 +41,10 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ FIXED NAVBAR BUTTON */
+/* NAVBAR BUTTON */
 #quiz-nav-btn,
-#learn-mode-btn {
+#learn-mode-btn,
+#toggle-interior-btn {
   width: auto;
   flex: 0 0 auto;
   align-self: center;
@@ -75,14 +75,24 @@ body {
   box-shadow: 0 0 12px rgba(72, 187, 120, 0.5);
 }
 
-/* ================= VIEWER ================= */
+#toggle-interior-btn.hiding {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#toggle-interior-btn.hiding:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/*  INTERIOR */
 #viewer-container {
   position: fixed;
   top: 50px;
   left: 0;
   width: 100%;
   height: calc(100vh - 50px);
-  background: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   overflow: hidden;
   z-index: 1;
 }
@@ -93,7 +103,7 @@ body {
   display: block;
 }
 
-/* ================= LEARN SIDEBAR ================= */
+/*  LEARN SIDEBAR  */
 .learn-sidebar {
   position: fixed;
   right: 0;
@@ -151,60 +161,7 @@ body {
   color: #667eea;
 }
 
-/* ================= INFO PANEL ================= */
-#info-panel {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.97);
-  color: #1a202c;
-  padding: 2rem;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-  max-height: 50vh;
-  z-index: 500;
-  transform: translateY(100%);
-  transition: transform 0.3s ease-out;
-}
-
-#info-panel.show {
-  transform: translateY(0);
-}
-
-/* ================= TOOLTIP ================= */
-#info-tooltip {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.98);
-  color: #1a202c;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  max-width: 350px;
-  max-height: 70vh;
-  overflow-y: auto;
-  z-index: 600;
-}
-
-#info-tooltip.hidden {
-  display: none;
-}
-
-#info-tooltip h3 {
-  color: #667eea;
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 2px solid #667eea;
-}
-
-#info-tooltip p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #2d3748;
-}
-
-/* ================= QUIZ MODAL ================= */
+/* QUIZ MODAL  */
 .quiz-modal {
   position: fixed;
   top: 50px;
@@ -233,7 +190,7 @@ body {
   overflow-y: auto;
 }
 
-/* ================= QUIZ BUTTON (INSIDE QUIZ) ================= */
+/*  QUIZ BUTTON  */
 .knowledge-btn {
   width: fit-content;
   padding: 0.6rem 1.2rem;
@@ -251,7 +208,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ================= FOOTER ================= */
+/*  FOOTER  */
 footer {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
@@ -264,14 +221,12 @@ footer p {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* ================= RESPONSIVE ================= */
+/*  RESPONSIVE */
 @media (max-width: 768px) {
-  #info-panel {
-    max-height: 40vh;
+  .learn-sidebar {
+    width: 100%;
   }
 }
-
-/* ================= RESTORE QUIZ STYLES ================= */
 
 #quiz {
   background: rgba(255, 255, 255, 0.95);
@@ -281,7 +236,7 @@ footer p {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-#quiz h3 {
+#quiz h2 {
   color: #667eea;
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -436,4 +391,53 @@ footer p {
 
 #restart-quiz:hover {
   background: #764ba2;
+}
+
+/* Interior View */
+#interior-view-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#toggle-interior-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+#sketchfab-container {
+    pointer-events: auto;
+    display: none;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 600px;
+    height: 50vh;
+    max-height: 450px;
+    background: #000;
+    border: 3px solid #7c3aed;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#sketchfab-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
