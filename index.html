@@ -18,7 +18,7 @@
     </div>
   </nav>
 
-  <!-- 3D Viewer (Full Screen) -->
+  <!-- 3D Viewer -->
   <div id="viewer-container">
     <canvas id="anatomyCanvas"></canvas>
     <div id="blood-flow-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></div>
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <!-- Quiz Modal (Hidden by default, shows on navbar click) -->
+  <!-- Quiz Modal -->
   <div id="quiz-modal" class="quiz-modal hidden">
     <div class="quiz-modal-content">
       <button id="close-quiz-modal" class="close-btn">✕</button>
@@ -46,11 +46,20 @@
     </div>
   </div>
 
-  <!-- Heart Facts Easter Egg -->
+  <!-- Heart Facts -->
   <div id="heart-facts-popup" style="display: none; position: fixed; bottom: 20px; right: 20px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); max-width: 250px; z-index: 900;">
-    <strong style="color: #667eea;">💡 Did you know?</strong>
+    <strong style="color: #667eea;"> Did you know?</strong>
     <p id="random-fact" style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #2d3748;"></p>
   </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+    }
+  }
+  </script>
 
   <script type="module" src="./src/app.js"></script>
 </body>

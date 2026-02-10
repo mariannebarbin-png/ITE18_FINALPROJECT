@@ -1,6 +1,6 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from "https://unpkg.com/three@0.158.0/build/three.module.js";
+import { OrbitControls } from "https://unpkg.com/three@0.158.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js";
 
 let scene, camera, renderer, controls, raycaster, mouse;
 let heartModel, heartMesh;
@@ -174,12 +174,14 @@ let currentQuizIndex = 0;
 let quizScore = 0;
 let answeredQuestions = 0;
 
-init();
-animate();
-initQuiz();
-initUIControls();
-initRandomFacts();
-initModeControls();
+window.addEventListener("load", () => {
+  init();
+  animate();
+  initQuiz();
+  initUIControls();
+  initRandomFacts();
+  initModeControls();
+});
 
 function initUIControls() {
   // Open quiz modal
